@@ -36,6 +36,8 @@ public class Employee {
     private String phone;
     @Column(name = "emergancy_ph", nullable = false)
     private String emergancy_ph;
+    @Column(name = "activeLink", nullable = false)
+    private String activeLink;
     @Column(name = "status", nullable = false)
     private String status;
    
@@ -120,7 +122,12 @@ public class Employee {
 		this.status = status;
 	}
 	
-	
+	public String getActiveLink() {
+		return activeLink;
+	}
+	public void setActiveLink(String activeLink) {
+		this.activeLink = activeLink;
+	}
 	@Override
 	public String toString() {
 		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", emailId=" + emailId

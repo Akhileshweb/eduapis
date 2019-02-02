@@ -1,4 +1,4 @@
-package com.edupeep.eduapis.services;
+package com.edupeep.eduapis.utils;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -10,8 +10,6 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
-import com.edupeep.eduapis.utils.MailData;
-
 
 /**
  * 
@@ -19,21 +17,30 @@ import com.edupeep.eduapis.utils.MailData;
  *
  */
 @Service
-public class MailService {
-
+public class MailUtils {
+	
+	public static String firstName;
+	public static String lastName;
+	public static String toEmailId;
+	public static String fromEmailId;
+	public static String subject;
+	public static String mailText;
+	public static boolean haveAttachment;
+	public static String fileAttachemnt;
+	
 	/*
 	 * The Spring Framework provides an easy abstraction for sending email by using
 	 * the JavaMailSender interface, and Spring Boot provides auto-configuration for
 	 * it as well as a starter module.
 	 */
-	private JavaMailSender javaMailSender;
+	static private JavaMailSender javaMailSender;
 
 	/**
 	 * 
 	 * @param javaMailSender
 	 */
 	@Autowired
-	public MailService(JavaMailSender javaMailSender) {
+	public MailUtils(JavaMailSender javaMailSender) {
 		this.javaMailSender = javaMailSender;
 	}
 	
@@ -45,19 +52,19 @@ public class MailService {
 	 * @throws MailException
 	 * @throws MessagingException
 	 */
-	public void sendEmail(MailData mailData) throws MailException, MessagingException {
+	public static void sendEmail() throws MailException, MessagingException {
 
 		MimeMessage message = javaMailSender.createMimeMessage();
 		
 		MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
 		helper.setText("utf-8", "html");
-		helper.setTo(mailData.getEmailAddress());
-		helper.setSubject(mailData.getSubject());
-		helper.setText(mailData.getMailText(), true);
+		helper.setTo(toEmailId);
+		helper.setSubject(subject);
+		helper.setText(mailText, true);
 		
-		if(mailData.isHaveAttachment()){
-		FileSystemResource file = new FileSystemResource(mailData.getFileAttachemnt());
+		if(haveAttachment){
+		FileSystemResource file = new FileSystemResource(fileAttachemnt);
 		helper.addAttachment(file.getFilename(), file);
 		}
 
