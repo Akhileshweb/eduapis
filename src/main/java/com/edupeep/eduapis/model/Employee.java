@@ -38,6 +38,8 @@ public class Employee {
     private String emergancy_ph;
     @Column(name = "activeLink", nullable = false)
     private String activeLink;
+    @Column(name = "profile_pic", nullable = false)
+    private String profile_pic;
     @Column(name = "status", nullable = false)
     private String status;
    
@@ -127,6 +129,13 @@ public class Employee {
 	}
 	public void setActiveLink(String activeLink) {
 		this.activeLink = activeLink;
+	}
+	
+	public String getProfile_pic() {
+		return profile_pic;
+	}
+	public void setProfile_pic(String profile_pic) {
+		this.profile_pic = profile_pic;
 	}
 	@Override
 	public String toString() {
